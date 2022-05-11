@@ -10,8 +10,10 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      format_sql: true
       ddl-auto: create
+    properties:
+      hibernate:
+        format-sql: true
 
 logging:
   level:

@@ -14,7 +14,7 @@ class UserController(private val userService:UserService) {
     @RequestMapping("/apply")
     fun applyUser(@RequestBody request: UserDto): User {
         request.apply {
-            return userService.applyUser(request)
+            return userService.applyUser(UserDto(userId,userName,userPassword))
         }
     }
 }

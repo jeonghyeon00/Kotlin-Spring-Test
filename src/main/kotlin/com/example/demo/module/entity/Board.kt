@@ -1,17 +1,15 @@
 package com.example.demo.module.entity
 import javax.persistence.*
-import com.example.demo.module.entity.User
 
 @Entity
 @Table(name="board")
-class Board (
+class Board(
     @Id
-    @GeneratedValue
-    val Idx: Long,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0,
     val title: String,
     val content: String,
     @ManyToOne
     @JoinColumn(name = "userId")
-    val user:User
-
+    val user: User,
 )
