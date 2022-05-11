@@ -1,13 +1,16 @@
 package com.example.demo.module.controller
 
 import com.example.demo.module.dto.BoardDto
+import com.example.demo.module.dto.BoardModifyDto
 import com.example.demo.module.entity.Board
 import com.example.demo.module.service.BoardService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -24,8 +27,13 @@ class BoardController(private val boardService: BoardService) {
         return boardService.getBoardById(id)
     }
 
-//    @GetMapping("{id}/delete")
-//    fun deleteBoardById(@PathVariable id:String){
-//
-//    }
+    @GetMapping("{id}/delete")
+    fun deleteBoardById(@PathVariable id:String){
+        return boardService.deleteById(id)
+    }
+
+    @PutMapping("{id}/modify")
+    fun modifyBoardById(@PathVariable id:String,@RequestBody request : BoardModifyDto):Board{
+        return boardService.modifyById(id,request)
+    }
 }

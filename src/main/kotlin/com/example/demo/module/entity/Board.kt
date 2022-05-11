@@ -7,8 +7,8 @@ class Board(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
-    val title: String,
-    val content: String,
+    var title: String,
+    var content: String,
     @ManyToOne
     @JoinColumn(name = "userId")
     val user: User,

@@ -1,6 +1,7 @@
 package com.example.demo.module.service
 
 import com.example.demo.module.dto.BoardDto
+import com.example.demo.module.dto.BoardModifyDto
 import com.example.demo.module.entity.Board
 import com.example.demo.module.repository.BoardRepository
 import com.example.demo.module.repository.UserRepository
@@ -19,5 +20,16 @@ class BoardService(private val boardRepository: BoardRepository,private val user
 
     fun getBoardById(BoardId:String):Board{
         return boardRepository.getById(BoardId.toLong())
+    }
+
+    fun deleteById(BoardId: String){
+        return boardRepository.deleteById(BoardId.toLong())
+    }
+
+    fun modifyById(BoardId: String,Board:BoardModifyDto): Board {
+        val getBoard=boardRepository.getById(BoardId.toLong())
+        getBoard.title=Board.title
+        getBoard.content=Board.content
+        return boardRepository.save(getBoard)
     }
 }
