@@ -35,5 +35,6 @@ class BoardController(private val boardService: BoardService) {
     @PutMapping("{id}/modify")
     fun modifyBoardById(@PathVariable id:String,@RequestBody request : BoardModifyDto):Board{
         return boardService.modifyById(id,request)
+
     }
 }
