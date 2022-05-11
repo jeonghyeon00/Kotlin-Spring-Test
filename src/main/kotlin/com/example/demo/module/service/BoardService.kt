@@ -16,4 +16,8 @@ class BoardService(private val boardRepository: BoardRepository,private val user
             return boardRepository.save(Board(id,title,content,userId))
         }
     }
+
+    fun getBoardById(BoardId:String):Board{
+        return boardRepository.getById(BoardId.toLong())
+    }
 }
