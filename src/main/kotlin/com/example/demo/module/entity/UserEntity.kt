@@ -6,8 +6,7 @@ import javax.persistence.*
 @Table(name="User")
 class User (
     @Id
-    @GeneratedValue
-    val userId: Long,
+    val userId: String,
     val userName: String,
     val userPassword: String,
 )

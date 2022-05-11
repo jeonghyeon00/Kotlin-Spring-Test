@@ -6,6 +6,6 @@ import org.springframework.data.repository.NoRepositoryBean
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserRepository : JpaRepository<User, Long>{
+interface UserRepository : JpaRepository<User, String>{
 
 }
