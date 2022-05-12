@@ -18,18 +18,18 @@ class BoardService(private val boardRepository: BoardRepository,private val user
         }
     }
 
-    fun getBoardById(BoardId:String):Board{
-        return boardRepository.getById(BoardId.toLong())
+    fun getBoardById(boardId:String):Board{
+        return boardRepository.getById(boardId.toLong())
     }
 
-    fun deleteById(BoardId: String){
-        return boardRepository.deleteById(BoardId.toLong())
+    fun deleteById(boardId: String){
+        return boardRepository.deleteById(boardId.toLong())
     }
 
-    fun modifyById(BoardId: String,Board:BoardModifyDto): Board {
-        val getBoard=boardRepository.getById(BoardId.toLong())
-        getBoard.title=Board.title
-        getBoard.content=Board.content
+    fun modifyById(boardId: String,board:BoardModifyDto): Board {
+        val getBoard=boardRepository.getById(boardId.toLong())
+        getBoard.title=board.title
+        getBoard.content=board.content
         return boardRepository.save(getBoard)
     }
 }

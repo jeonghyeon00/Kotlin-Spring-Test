@@ -4,6 +4,7 @@ import com.example.demo.module.dto.BoardDto
 import com.example.demo.module.dto.BoardModifyDto
 import com.example.demo.module.entity.Board
 import com.example.demo.module.service.BoardService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -27,7 +28,7 @@ class BoardController(private val boardService: BoardService) {
         return boardService.getBoardById(id)
     }
 
-    @GetMapping("{id}/delete")
+    @DeleteMapping("{id}/delete")
     fun deleteBoardById(@PathVariable id:String){
         return boardService.deleteById(id)
     }
