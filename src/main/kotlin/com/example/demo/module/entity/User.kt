@@ -1,5 +1,6 @@
 package com.example.demo.module.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -8,5 +9,6 @@ class User (
     @Id
     val userId: String,
     val userName: String,
+    @JsonIgnore()
     val userPassword: String,
 )

@@ -1,4 +1,5 @@
 package com.example.demo.module.entity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
 @Entity
@@ -12,4 +13,7 @@ class Board(
     @ManyToOne
     @JoinColumn(name = "userId")
     val user: User,
+    @JsonIgnoreProperties("board")
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    var replyList:List<Comment>,
 )
