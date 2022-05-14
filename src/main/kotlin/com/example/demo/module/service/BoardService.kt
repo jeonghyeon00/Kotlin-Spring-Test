@@ -9,6 +9,7 @@ import com.example.demo.module.repository.BoardRepository
 import com.example.demo.module.repository.CommentRepository
 import com.example.demo.module.repository.UserRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 
 @Service
@@ -17,7 +18,7 @@ class BoardService(private val boardRepository: BoardRepository,private val user
     fun createBoard(boardDto: BoardDto):Board{
         val userId=userRepository.getById(boardDto.userId)
         boardDto.apply {
-            return boardRepository.save(Board(id,title,content,userId, replyList= emptyList()))
+            return boardRepository.save(Board(title,content, createdAt= Date(), updatedAt = Date(), userId, replyList= emptyList()))
         }
     }
 
@@ -31,8 +32,11 @@ class BoardService(private val boardRepository: BoardRepository,private val user
 
     fun modifyById(boardId: String,board:BoardModifyDto): Board {
         val getBoard=boardRepository.getById(boardId.toLong())
-        getBoard.title=board.title
-        getBoard.content=board.content
+        if(getBoard.user.userId==board.userId) {
+            getBoard.title = board.title
+            getBoard.content = board.content
+            getBoard.updatedAt = Date()
+        }
         return boardRepository.save(getBoard)
     }
 
@@ -42,6 +46,5 @@ class BoardService(private val boardRepository: BoardRepository,private val user
         comment.apply {
             return commentRepository.save(Comment(id,user,board,content))
         }
-
     }
 }

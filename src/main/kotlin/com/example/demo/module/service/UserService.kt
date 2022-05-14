@@ -12,11 +12,8 @@ class UserService(private val userRepository: UserRepository) {
 
     fun applyUser(userDto: UserDto): User {
         userDto.apply{
-            return userRepository.save(User(userId,userName,userPassword))
+            return userRepository.save(User(userId,userName,userPassword,))
         }
-    }
-    fun getById(): User {
-        return userRepository.getById("sjh00kr")
     }
 
     }
