@@ -3,6 +3,7 @@ package com.example.demo.module.controller
 import com.example.demo.module.dto.BoardDto
 import com.example.demo.module.dto.BoardModifyDto
 import com.example.demo.module.dto.CommentDto
+import com.example.demo.module.dto.CommentModifyDto
 import com.example.demo.module.entity.Board
 import com.example.demo.module.entity.Comment
 import com.example.demo.module.service.BoardService
@@ -44,5 +45,15 @@ class BoardController(private val boardService: BoardService) {
     @PostMapping("{id}/comment")
     fun postComment(@PathVariable id:String, @RequestBody request:CommentDto):Comment{
         return boardService.postComment(id, request)
+    }
+
+    @PatchMapping("{boardId}/{commentId}")
+    fun modifyComment(@PathVariable boardId:String, @PathVariable commentId:Long,@RequestBody request : CommentModifyDto):Comment{
+        return boardService.modifyComment(boardId,commentId,request)
+    }
+
+    @DeleteMapping("{boardId}/{commentId}")
+    fun deleteComment(@PathVariable boardId:String, @PathVariable commentId:Long){
+        return boardService.deleteComment(boardId,commentId)
     }
 }

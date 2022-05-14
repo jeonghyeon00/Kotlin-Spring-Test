@@ -3,6 +3,7 @@ package com.example.demo.module.service
 import com.example.demo.module.dto.BoardDto
 import com.example.demo.module.dto.BoardModifyDto
 import com.example.demo.module.dto.CommentDto
+import com.example.demo.module.dto.CommentModifyDto
 import com.example.demo.module.entity.Board
 import com.example.demo.module.entity.Comment
 import com.example.demo.module.repository.BoardRepository
@@ -47,5 +48,17 @@ class BoardService(private val boardRepository: BoardRepository,private val user
         comment.apply {
             return commentRepository.save(Comment(id,user,board,content))
         }
+    }
+
+    fun modifyComment(boardId:String, commentId:Long, contentInput:CommentModifyDto):Comment{
+        val comment= commentRepository.getById(commentId)
+        comment.apply {
+            content=contentInput.content
+        }
+        return commentRepository.save(comment)
+    }
+
+    fun deleteComment(boardId:String,commentId:Long){
+        val comment= commentRepository.deleteById(commentId)
     }
 }

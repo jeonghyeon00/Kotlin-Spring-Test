@@ -21,5 +21,5 @@ data class Comment(
     @JoinColumn(name="boardId")
     val board:Board,
 
-    val content:String,
+    var content:String,
 )
