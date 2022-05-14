@@ -31,11 +31,12 @@ class BoardService(private val boardRepository: BoardRepository,private val user
     }
 
     fun modifyById(boardId: String,board:BoardModifyDto): Board {
-        val getBoard=boardRepository.getById(boardId.toLong())
-        if(getBoard.user.userId==board.userId) {
-            getBoard.title = board.title
-            getBoard.content = board.content
-            getBoard.updatedAt = Date()
+        val getBoard=boardRepository.getById(boardId.toLong()).apply {
+            if(user.userId==board.userId){
+                title=board.title
+                content=board.content
+                updatedAt=Date()
+            }
         }
         return boardRepository.save(getBoard)
     }

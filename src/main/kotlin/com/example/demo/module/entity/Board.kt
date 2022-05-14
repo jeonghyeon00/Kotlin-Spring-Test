@@ -12,7 +12,7 @@ class Board(
     var content: String,
     var createdAt: Date,
     var updatedAt:Date,
-    @ManyToOne()
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId")
     val user: User,

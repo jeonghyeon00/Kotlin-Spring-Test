@@ -12,10 +12,12 @@ data class Comment(
     val id:Long=0,
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="userId")
     val user:User,
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="boardId")
     val board:Board,
 
