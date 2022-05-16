@@ -5,21 +5,21 @@ import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity
-@Table(name="comment")
+@Table(name = "comment")
 data class Comment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id:Long=0,
+    val id: Long = 0,
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="userId")
-    val user:User,
+    @JoinColumn(name = "userId")
+    val user: User,
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="boardId")
-    val board:Board,
+    @JoinColumn(name = "boardId")
+    val board: Board,
 
-    var content:String,
+    var content: String,
 )

@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/user")
-class UserController(private val userService:UserService) {
+class UserController(private val userService: UserService) {
 
     @RequestMapping("/apply")
     fun applyUser(@RequestBody request: UserDto): User {
         request.apply {
-            return userService.applyUser(UserDto(userId,userName,userPassword))
+            return userService.applyUser(UserDto(userId, userName, userPassword))
         }
     }
 
     @DeleteMapping("/delete/{userId}")
-    fun deleteUser(@PathVariable userId:String){
+    fun deleteUser(@PathVariable userId: String) {
         return userService.deleteUser(userId)
     }
 }

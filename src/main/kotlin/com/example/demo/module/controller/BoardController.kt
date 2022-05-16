@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,39 +20,39 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/board")
 class BoardController(private val boardService: BoardService) {
     @PostMapping("/create")
-    fun createBoard(@RequestBody request:BoardDto):Board{
+    fun createBoard(@RequestBody request: BoardDto): Board {
         request.apply {
-            return boardService.createBoard(BoardDto(id,title, content, userId))
+            return boardService.createBoard(BoardDto(id, title, content, userId))
         }
     }
-    @GetMapping("{id}")
-    fun getBoardById(@PathVariable id: String):Board{
-        return boardService.getBoardById(id)
+    @GetMapping("{boardId}")
+    fun getBoardById(@PathVariable boardId: String): Board {
+        return boardService.getBoardById(boardId)
     }
 
-    @DeleteMapping("{id}/delete")
-    fun deleteBoardById(@PathVariable id:String){
-        return boardService.deleteById(id)
+    @DeleteMapping("{boardId}/delete")
+    fun deleteBoardById(@PathVariable boardId: String) {
+        return boardService.deleteById(boardId)
     }
 
-    @PatchMapping("{id}/modify")
-    fun modifyBoardById(@PathVariable id:String,@RequestBody request : BoardModifyDto):Board {
-        return boardService.modifyById(id, request)
-
+    @PatchMapping("{boardId}/modify")
+    fun modifyBoardById(@PathVariable boardId: String, @RequestBody request: BoardModifyDto): Board {
+        return boardService.modifyById(boardId, request)
     }
 
-    @PostMapping("{id}/comment")
-    fun postComment(@PathVariable id:String, @RequestBody request:CommentDto):Comment{
-        return boardService.postComment(id, request)
+    //댓글
+    @PostMapping("{boardId}/comment")
+    fun postComment(@PathVariable boardId: String, @RequestBody request: CommentDto): Comment {
+        return boardService.postComment(boardId, request)
     }
 
-    @PatchMapping("{boardId}/{commentId}")
-    fun modifyComment(@PathVariable boardId:String, @PathVariable commentId:Long,@RequestBody request : CommentModifyDto):Comment{
-        return boardService.modifyComment(boardId,commentId,request)
+    @PatchMapping("comment/{commentId}")
+    fun modifyComment(@PathVariable commentId: Long, @RequestBody request: CommentModifyDto): Comment {
+        return boardService.modifyComment(commentId, request)
     }
 
-    @DeleteMapping("{boardId}/{commentId}")
-    fun deleteComment(@PathVariable boardId:String, @PathVariable commentId:Long){
-        return boardService.deleteComment(boardId,commentId)
+    @DeleteMapping("comment/{commentId}")
+    fun deleteComment(@PathVariable commentId: Long) {
+        return boardService.deleteComment(commentId)
     }
 }

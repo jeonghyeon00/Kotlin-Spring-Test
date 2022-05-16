@@ -6,21 +6,21 @@ import java.util.Date
 import javax.persistence.*
 
 @Entity
-@Table(name="board")
+@Table(name = "board")
 class Board(
     var title: String,
     var content: String,
     var createdAt: Date,
-    var updatedAt:Date,
+    var updatedAt: Date,
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId")
     val user: User,
     @JsonIgnoreProperties("board")
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE])
-    var replyList:List<Comment>,
-){
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-val id:Long=0
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    var replyList: List<Comment>,
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0
 }
