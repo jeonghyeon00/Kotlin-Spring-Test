@@ -19,13 +19,17 @@ repositories {
 }
 
 dependencies {
+    fun springBoot(module: String) = "org.springframework.boot:spring-boot-$module"
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa") // <-- 추가됨
     implementation("org.springframework.boot:spring-boot-starter-jdbc") // <-- 추가됨
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.postgresql:postgresql")
     implementation("mysql:mysql-connector-java")
+    implementation(springBoot("starter-security"))
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
