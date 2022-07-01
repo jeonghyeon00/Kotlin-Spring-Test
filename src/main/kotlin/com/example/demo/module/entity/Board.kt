@@ -1,17 +1,26 @@
 package com.example.demo.module.entity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
+import java.util.Date
 import javax.persistence.*
-import com.example.demo.module.entity.User
 
 @Entity
-@Table(name="board")
-class Board (
-    @Id
-    @GeneratedValue
-    val Idx: Long,
-    val title: String,
-    val content: String,
+@Table(name = "board")
+class Board(
+    var title: String,
+    var content: String,
+    var createdAt: Date,
+    var updatedAt: Date,
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId")
-    val user:User
-
-)
+    val user: User,
+    @JsonIgnoreProperties("board")
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    var replyList: List<Comment>,
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0
+}

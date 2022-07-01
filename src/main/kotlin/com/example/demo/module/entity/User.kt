@@ -1,13 +1,15 @@
 package com.example.demo.module.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
-@Table(name="User")
-class User (
+@Table(name = "User")
+class User(
     @Id
-    @GeneratedValue
-    val userId: Long,
+    val userId: String,
     val userName: String,
+    @JsonIgnore()
     val userPassword: String,
+
 )
